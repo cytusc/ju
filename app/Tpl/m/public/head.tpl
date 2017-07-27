@@ -10,5 +10,10 @@
 <meta name="description" content="{$page_seo.description}" />
 <link rel="icon" href="/favicon.ico" type="image/x-icon" />
 <link rel="stylesheet" type="text/css" href="/static/wap/css/all.css" />
+<if condition="C('yh_site_secret') eq '1'">
+<yh:load type="js" href="__STATIC__/mobile/assets/js/jquery.min.js,__STATIC__/wap/js/swiper.jquery.min.js,__STATIC__/tuiquanke/js/jquery.scrollLoading.js" />
+<else/>
 <yh:load type="js" href="__STATIC__/mobile/assets/js/jquery.min.js,__STATIC__/wap/js/swiper.jquery.min.js" />
+</if>
+
 {:C('yh_taojindian_html')}

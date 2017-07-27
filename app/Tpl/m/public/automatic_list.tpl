@@ -5,7 +5,7 @@
 		<div class="tqk_pic">
 		<a data-transition="slide" href="<if condition="C('APP_SUB_DOMAIN_DEPLOY') eq false">{:U('/m/detail',array('id'=>$item['id']))}<else/>{:U('/detail',array('id'=>$item['id']))}</if>" class="img QtkSelfClick">
 		{$item.coupon_start_time|newicon}
-			<img src="{$item.pic_url}_400x400" alt="">
+		<img <if condition="C('yh_site_secret') eq '1'">  class="scrollLoading" data-url="{$item.pic_url}_400x400" data-original="{$item.pic_url}_400x400" src="__STATIC__/tuiquanke/images/pixel.gif" <else/> src="{$item.pic_url}_400x400" </if>  />
 		</a></div>
 		<a data-transition="slide" href="<if condition="C('APP_SUB_DOMAIN_DEPLOY') eq false">{:U('/m/detail',array('id'=>$item['id']))}<else/>{:U('/detail',array('id'=>$item['id']))}</if>" class="title QtkSelfClick">
 			<div class="text" style=" color:#777777;">{$item.title}</div>

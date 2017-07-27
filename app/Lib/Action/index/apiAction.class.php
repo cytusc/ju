@@ -10,9 +10,134 @@ class apiAction extends FirstendAction
     public function _initialize()
     {
         parent::_initialize();
-        //域名验证
         $this->accessKey = C('yh_gongju');
     }
+	
+	
+public function userlist(){
+$this->check_key();
+$openid = I('openid', '', 'trim');
+
+var_dump($openid);
+
+exit();
+
+$U=M('user');
+$where=array(
+'state'=>0,
+);
+$list=$U->where($where)->field('id,avatar')->select();
+$userlist_a=$this->shuffle_assoc($list);
+$where=array(
+'openid'=>$openid,
+);
+
+
+$data=array(
+'last_time'=>time(),
+);
+$res=$U->where($where)->save($data);
+
+$userlist_b=$U->where('unix_timestamp(now())-last_time < 3600 and state = 1')->field('id,avatar')->select();
+
+
+$person_avatar='http://data.7ihome.com/static/zhibo/img/quan.jpg';
+$person_id='1';
+
+//array_merge_recursive
+
+
+$user=array();
+foreach($userlist as $k=>$v){
+if($k<25){
+$user[$k]['avatar']=C('yh_site_url').$v['avatar'];
+$user[$k]['id']=$v['id'];
+}else{
+ break;
+}
+
+}
+
+
+if($user){
+ $json = array(
+                'result'=>$user,
+                'count'=>count($userlist)+C('yh_person_num')+1,
+                'status'=>'yes',
+                'msg'=>'获取用户数据成功'
+ );	
+exit(json_encode($json));
+}else{
+$data=array(
+'status'=>'no',
+'msg'=>'没有用户数据！'
+);
+exit(json_encode($data));	
+}
+
+
+}	
+
+
+ protected function shuffle_assoc($array){
+
+  $ary_keys = array_keys($array);
+  $ary_values = array_values($array);
+  shuffle($ary_values);
+  foreach($ary_keys as $key => $value){
+    if (is_array($ary_values[$key]) && $ary_values[$key] != NULL) {
+
+      $ary_values[$key] = $this->shuffle_assoc($ary_values[$key]);  
+    }  
+    $new[$value] = $ary_values[$key];
+  }  
+  return $new;  
+} 
+
+	
+public function reg(){
+$this->check_key();
+$U=M('user');
+$openid = I('openid', '', 'trim');
+$where=array(
+'openid'=>$openid,
+);
+$exit_openid=$U->where($where)->count();
+
+if($exit_openid<=0){
+$data=array(
+'username'=>'wx_'.substr($openid,20,6),
+'nickname'=>'wx_'.substr($openid,20,6),
+'password'=>md5(substr($openid,20,6)),
+'reg_ip'=>get_client_ip(),
+'state'=>1,
+'status'=>1,
+'reg_time'=>time(),
+'last_time'=>time(),
+'create_time'=>time(),
+'openid'=>$openid,
+);
+$res=$U->add($data);
+}
+
+if($res){
+$json = array(
+                'state'=>'yes',
+                'msg'=>'注册成功'
+ );	
+}else{
+$json = array(
+                'state'=>'no',
+                'msg'=>'注册失败'
+ );	
+}
+
+
+
+exit(json_encode($json));
+	
+}
+	
 
 public function tool_caiji()
     {
@@ -41,7 +166,7 @@ public function tool_caiji()
         $map['start'] = $startId;
         $map['pagesize'] = $num;
         $map['key'] = $this->accessKey;
-        $url = 'http://ap.tuiquanke.com:307/api/get_tbitems_new?'.http_build_query($map);
+        $url = 'http://ap.tuiquanke.com/api/get_tbitems_new?'.http_build_query($map);
         $content = file_get_contents($url);
         $json = json_decode($content, true);
 		$PID= $json['pid'];
@@ -374,6 +499,19 @@ public function change_items()
         
         exit(json_encode($result));
     }
+	
+	
+protected  function check_key(){
+ $json = array(
+         'state'=>'no',
+          'msg'=>'通行密钥不正确'
+         );
+
+$key = I('key', '', 'trim');
+if(!$key || $key!=$this->accessKey){
+exit(json_encode($json));
+}	
+ }
 
 
 }

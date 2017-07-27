@@ -17,6 +17,14 @@
                 <label><input type="radio" class="J_change_status" <if condition="C('yh_site_tiaozhuan') eq '0'">checked="checked"</if> value="0" name="setting[site_tiaozhuan]"> {:L('close')}</label>
             </td>
     	</tr>
+    	 	<tr>
+        	<th>开启图片延时加载 :</th>
+        	<td>
+            	<label><input type="radio" class="J_change_status" <if condition="C('yh_site_secret') eq '1'">checked="checked"</if> value="1" name="setting[site_secret]"> {:L('open')}</label> &nbsp;&nbsp;
+                <label><input type="radio" class="J_change_status" <if condition="C('yh_site_secret') eq '0'">checked="checked"</if> value="0" name="setting[site_secret]"> {:L('close')}</label>
+            </td>
+    	</tr>
+    	
         <tr>
             <th width="150">{:L('site_name')} :</th>
             <td><input type="text" name="setting[site_name]" class="input-text" size="30" value="{:C('yh_site_name')}"></td>
@@ -59,22 +67,29 @@
             </td>
 		</tr>
 		
-   <tr>
-			<th width="10%">AppID(应用ID) :</th>
-        	<td width="40%">
-				<input type="text" name="setting[app_key]" class="input-text" size="45" value="{:C('yh_app_key')}" placeholder="微信公众号应用ID">
-            </td>
-		</tr>
-		<tr>
+     
+	 <!--	<tr>
             <th width="150">AppSecret(应用密钥):</th>
             <td>
                 <input type="text" name="setting[site_secret]" placeholder="微信公众号应用密钥" class="input-text" size="50" value="{:C('yh_site_secret')}" /><br>
 	           </td>
         </tr>
-		
+		-->
 		<tr>
 			<th width="150">通行密钥 :</th>
 			<td><input type="text" name="setting[gongju]" class="input-text" size="50" value="{:C('yh_gongju')}" /><br><span class="gray ml10">请复制推券客高佣金申请工具中的通行密钥填写</span></td>
+		</tr>
+		
+		<!--<tr>
+			<th width="150">Token :</th>
+			<td><input type="text" name="setting[token]" class="input-text" size="50" value="{:C('yh_token')}" /></td>
+		</tr>-->
+     <tr>
+			<th width="10%">pc版头部文字 :</th>
+        	<td width="40%">
+        		 <textarea rows="3" cols="80" name="setting[app_key]">{:C('yh_app_key')}</textarea> 
+				
+            </td>
 		</tr>
 
         <tr>

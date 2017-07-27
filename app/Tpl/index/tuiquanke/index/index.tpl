@@ -50,7 +50,7 @@
 			                </a>
 			            </dd>
 			            <dd>
-			                <a href="/jiu" class="down">
+			                <a href="/?m=jiu" class="down">
 			                    <img src="__STATIC__/tuiquanke/images/baoyou.jpg" height="151">
 			                </a>
 			            </dd>
@@ -80,19 +80,17 @@
 	<ul>
 		<volist name="taobao" id="vo" key="k">
 		<li <if condition="$k%3 eq 0">class="no-right"</if> >
-			<a href="{$vo.item_url}" target="_blank" isconvert="1" class="qg-item qg-ing">
+			<a href="{:U('/jump/',array('item'=>$vo['num_iid']))}" target="_blank" isconvert="1" class="qg-item qg-ing">
 			    <div class="qg-img">
-			        <img src="{$vo.pict_url}_250x250">
+			        <img src="{$vo.pict_url}_200x200" width="180">
 			    </div>
 			    <div class="qg-detail">
 			        <div class="name">
 			            <p class="des">{$vo.title}</p>
-                        <p class="subtitle">品牌直供全国包邮</p>
                    	</div>			
 			        <div class="link">
 			            <div class="price">
-			                <span class="original-price">¥<i>{$vo.reserve_price}</i></span>
-			                <span class="promo-price">¥<em>{$vo.zk_final_price}</em></span>
+			               <span class="promo-price">¥<em>{$vo.zk_final_price}</em></span>
 			            </div>
 			            <div class="link-btn">立即抢购</div>
 			        </div>

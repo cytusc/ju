@@ -379,24 +379,24 @@ class indexAction extends FirstendAction {
 		$this->assign('page_seo', $page_seo);
 		$this->assign('pager','so');
 		
-		$appkey=C('yh_taobao_appkey');
-		$appsecret=C('yh_taobao_appsecret');
-		if(!empty($appkey) && !empty($appsecret) && $k && count($this->items_list)==0){
-		    $c = new TopClient();
-		    $c->appkey = $appkey;
-		    $c->secretKey = $appsecret;
-		    $c->format = 'json';
-		    $req = new TbkItemGetRequest();
-		    $req->setPageNo("1");
-		    $req->setPageSize("6");
-		    $req->setFields("num_iid,title,pict_url,reserve_price,zk_final_price,user_type,item_url,seller_id,volume,nick");
-		    $req->setQ((string)$k);
-		    $resp = $c->execute($req);
-		
-		    $resp = json_decode(json_encode($resp), true);
-		
-		    $this->assign('taobao', $resp['results']['n_tbk_item']);
-		}
+//		$appkey=C('yh_taobao_appkey');
+//		$appsecret=C('yh_taobao_appsecret');
+//		if(!empty($appkey) && !empty($appsecret) && $k && count($this->items_list)==0){
+//		    $c = new TopClient();
+//		    $c->appkey = $appkey;
+//		    $c->secretKey = $appsecret;
+//		    $c->format = 'json';
+//		    $req = new TbkItemGetRequest();
+//		    $req->setPageNo("1");
+//		    $req->setPageSize("40");
+//		    $req->setFields("num_iid,title,pict_url,reserve_price,zk_final_price,user_type,item_url,seller_id,volume,nick");
+//		    $req->setQ((string)$k);
+//		    $resp = $c->execute($req);
+//		
+//		    $resp = json_decode(json_encode($resp), true);
+//		
+//		    $this->assign('taobao', $resp['results']['n_tbk_item']);
+//		}
 		
 		$this->display();
     }

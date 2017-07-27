@@ -8,7 +8,7 @@
 						<input type="hidden" name="a" value="so">
 						<div class="border-btm clearfix">
 							<div class="input-wrapper" style="width: 100%;">
-								<input autocomplete="off" type="text" name="k" placeholder="请输入您要搜索的商品名称">
+								<input autocomplete="off" value="{$key}" type="text" name="k" placeholder="请输入您要搜索的商品名称">
 							</div>
 							<div class="search-btn-wrapper">
 								<button type="submit"></button>

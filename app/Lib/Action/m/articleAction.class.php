@@ -36,7 +36,7 @@ class articleAction extends FirstendAction
             ->order($order)
             ->limit($start . ',' . $page_size)
             ->select();
-        $orlike = D('items')->cache(true, 10 * 60)->where("isshow=1 and pass=1 and tuisong=1")
+        $orlike = D('items')->cache(true, 10 * 60)->where("pass=1")
             ->limit('0,14')
             ->order('is_commend desc,id desc')
             ->select();
@@ -67,16 +67,18 @@ class articleAction extends FirstendAction
 		$hits_data = array('hits'=>array('exp','hits+1'));
 		$help_mod->where(array('id'=>$id))->setField($hits_data);
 			
-        $help = $help_mod->field('id,title,info,author')->find($id);
+        $help = $help_mod->field('id,title,info,author,seo_title,seo_keys,seo_desc')->find($id);
         $helps = $help_mod->field('id,title,info,author')->select();
         $this->_config_seo(array(
-            'title' => $help['title']
+            'title' => $help['seo_title']?$help['seo_title']:$help['title'],
+            'keywords'=>$help['seo_keys'],
+	        'description'=>$help['seo_desc']
         ));
         $this->assign('helps', $helps);
         $this->assign('id', $id);
         $this->assign('help', $help); // 分类选中
         
-        $orlike = D('items')->cache(true, 10 * 60)->where("isshow=1 and tuisong=1 and pass=1 and title like '%" . $help['author'] . "%' ")
+        $orlike = D('items')->cache(true, 10 * 60)->where("title like '%" . $help['author'] . "%' ")
             ->limit('0,8')
             ->order('is_commend desc,id desc')
             ->select();

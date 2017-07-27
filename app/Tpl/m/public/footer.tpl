@@ -171,12 +171,14 @@
 		$('body,html').animate({scrollTop:0},500);
 		return false;
 	})
-
-
+<if condition="C('yh_site_secret') eq '1'">
+$(".scrollLoading").scrollLoading(); 
+</if>
 $('#back_top .call-top').click(function() {
 	$('body,html').animate({ scrollTop: 0 }, 500);
 	return false;
 })
 });
+
 </script>
 <div style="display:none;">{:C('yh_statistics_code')}</div>

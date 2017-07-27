@@ -78,30 +78,20 @@
                 </a>
                 <div class="padding">
                     <a target="_blank" href="{:U('/item/',array('id'=>$val['id']))}" class="title clearfix cnzzCounter" data-cnzz-type="1" data-cnzz="{$val['id']}">
-                  <if condition="$val.shop_type eq 'C' "><i class="taobao"></i></if>
-				 <if condition="$val.shop_type eq 'B' "><i class="tmall"></i></if> 
-                        <span>{$val.title}</span>
+                       {$val.title}
                     </a>
-                    <div class="coupon-wrap clearfix">
-                       <span>  <if condition="$val.shop_type eq 'C' ">淘宝</if><if condition="$val.shop_type eq 'B' ">天猫</if>售价&nbsp;<span class="price">￥{$val.price}</span>                              </span>
-                            </span>元，已有<span
-                                    class="num">{$val.volume}</span>人购买
+                    <div class="coupon-wrap clearfix" >
+                    	<p>
+                        	<span>券后价<font style="font-size: 18px;">{$val.coupon_price}</font>元</span>
+                          <span style="float: right;"><if condition="$val.shop_type eq 'C' ">淘宝</if><if condition="$val.shop_type eq 'B' ">天猫</if><font color="red">{$val.price}</font>元</span>
+                        </p>
+                        <p>
+                            <if condition="$val.shop_type eq 'C' "><i class="taobao"></i></if>
+						<if condition="$val.shop_type eq 'B' "><i class="tmall"></i></if>月销量  <span class="num">{$val.volume}</span>,
+														<span>优惠券<font color="red">{$val.quan}</font>元</span>
+                        </p>        
                     </div>
                 </div>
-                  <div class="clearfix buy-step">
-                        	    <div class="buy-step-first">
-														<span>
-															<table>
-																<tr>
-																	<td style="font-size: 40px; padding-left: 5px; padding-right: 5px;">{:floor($val['quan'])} </td>
-																	<td><b _hover-ignore="1">元优惠券</b>
-															<i>券后只要￥<font class="price">{$val.coupon_price}</font></i></td>
-																</tr>
-															</table>
-														</span>
-														<a rel="nofollow" class="coupon-btn" href="{:U('/out/action/quan/',array('id'=>$val['id']))}" target="_blank" title="领券后请点击右边按钮下单" _hover-ignore="1">点击领取</a>
-							</div>
-                        </div>
             </li>
 										</volist>
 								</ul>

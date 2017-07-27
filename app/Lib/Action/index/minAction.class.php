@@ -42,7 +42,7 @@ class minAction extends FirstendAction
                 $resparr = xmlToArray($resp);
                 $newitem = $resparr['results']['n_tbk_item'];
                 if (count($newitem) > 0 || $newitem === null) {
-                    $url = "http://ap.tuiquanke.com:307/?m=api&a=checkcoupon&key=" . C('yh_gongju') . "&activityId=" . $item['Quan_id'] . "&itemId=" . $item['num_iid'] . "";
+                    $url = "http://ap.tuiquanke.com/?m=api&a=checkcoupon&key=" . C('yh_gongju') . "&activityId=" . $item['Quan_id'] . "&itemId=" . $item['num_iid'] . "";
                     $ch = curl_init();
                     curl_setopt($ch, CURLOPT_URL, $url);
                     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);

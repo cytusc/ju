@@ -23,7 +23,7 @@
 													<else />
 													<a isconvert="1" data-itemid="{$item.num_iid}" href="{:U('/out/action/quan/',array('id'=>$item['id']))}" rel='nofollow' target="_blank" title="{$item.title}">
 											</if>
-											<img src="{:attach(get_thumb($item['pic_url'], '_b'),'item')}_400x400" width="400px" height="400px">
+											<img class="scrollLoading" data-url="{:attach(get_thumb($item['pic_url'], '_b'),'item')}_400x400" data-original="{:attach(get_thumb($item['pic_url'], '_b'),'item')}_400x400" src="{:attach(get_thumb($item['pic_url'], '_b'),'item')}_400x400" width="400px" height="400px">
 											</a>
 										</div>
 										<div class="goods_detail">
@@ -109,19 +109,24 @@
 											<yh:item type="orlike" cid="$item['cate_id']">
 												<volist name="items_list" id="val" key="i" mod="3">
 													<li style="margin-right:8px;">
-														<a href="{:U('/item/',array('id'=>$val['id']))}" class="img cnzzCounter" target="_blank" data-cnzz-type="1" data-cnzz="{$val['id']}">
-															<img src="{$val['pic_url']}_400x400" alt="">
+														<a style="display: block;" href="{:U('/item/',array('id'=>$val['id']))}" class="img cnzzCounter" target="_blank" data-cnzz-type="1" data-cnzz="{$val['id']}">
+															<img <if condition="C('yh_site_secret') eq '1'">  class="scrollLoading" data-url="{$val['pic_url']}_400x400" data-original="{$val['pic_url']}_400x400" </if> src="{$val['pic_url']}_400x400" alt="">
+														<div class="lq">
+				<div class="lq-t">
+					<p class="lq-t-d1">领优惠券</p>
+					<p class="lq-t-d2">省<span>{:floor($val['quan'])}</span>元</p>
+				</div>
+				<div class="lq-b"></div>
+  </div>
 														</a>
 														<div class="padding">
 															<a target="_blank" href="{:U('/item/',array('id'=>$val['id']))}" class="title clearfix cnzzCounter" data-cnzz-type="1" data-cnzz="{$val['id']}">
-																
-
 																{$val.title}
 															</a>
 															<div class="coupon-wrap clearfix" >
 								                            	<p>
-									                            	<span>券后价<font style="font-size: 18px;">{$val.coupon_price}</font>元</span>
-									                              <span style="float: right;"><if condition="$val.shop_type eq 'C' ">淘宝</if><if condition="$val.shop_type eq 'B' ">天猫</if><font color="red">{$item.price}</font>元</span>
+									                            	<span><font style="font-size: 18px;">{$val.coupon_price}</font>元<i class="quanhou"></i></span>
+									                              <span style="float: right;"><if condition="$val.shop_type eq 'C' ">淘宝</if><if condition="$val.shop_type eq 'B' ">天猫</if><font color="red">{$val.price}</font>元</span>
 									                            </p>
 									                            <p>
 									                                <if condition="$val.shop_type eq 'C' "><i class="taobao"></i></if>
@@ -129,19 +134,7 @@
 																								<span>优惠券<font color="red">{$val.quan}</font>元</span>
 									                            </p>        
 								                            </div>
-															<!--<div class="coupon-wrap clearfix">
-																优惠券<span class="price">{$val.quan}</span>元，已有<span class="num">{$val.volume}</span>人购买
-															</div>-->
 														</div>
-														<!--<div class="price-wrap clearfix">
-															<div class="price">
-																<div class="text">券后价&nbsp;￥<span class="price">{$val.coupon_price}</span></div>
-															</div>
-															<div class="org-price">
-																<div class="text">正常售价&nbsp;￥<span class="price">{$val.price}</span>
-																</div>
-															</div>
-														</div>-->
 													</li>
 
 												</volist>

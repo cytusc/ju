@@ -16,10 +16,19 @@
 </div>
 </div>
 <div id="back_top" class="back_top">
+	<img id="wechat" src="{:C('yh_site_flogo')}" />	
 	<a href="javascript:;" class="call-top" title="返回顶部"></a>
-	<a id="checkTrap" class="checkTrap" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin={:C('yh_qq')}&site=qq&menu=yes"><span class="call-check" title="联系客服"></span></a>
+	<a id="checkTrap" class="checkTrap" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin={:C('yh_qq')}&site=qq&menu=yes"><span class="call-check" title="联系客服"></span>
+	</a>
 	<div class="hide">
 	</div>
 </div>
 <a id="checkTrap" class="checkTrap" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin={:C('yh_qq')}&site=qq&menu=yes"></a>
+<if condition="C('yh_site_secret') eq '1'">
+<yh:load type="js" href="__STATIC__/tuiquanke/js/jquery.js,__STATIC__/tuiquanke/js/slider.js,__STATIC__/tuiquanke/js/layer/layer.js,__STATIC__/tuiquanke/js/clipboard.min.js,__STATIC__/tuiquanke/js/base.js,__STATIC__/tuiquanke/js/jquery.scrollLoading.js" />
+<script type="text/javascript">
+		$(".scrollLoading").scrollLoading(); 
+</script>
+<else/>
 <yh:load type="js" href="__STATIC__/tuiquanke/js/jquery.js,__STATIC__/tuiquanke/js/slider.js,__STATIC__/tuiquanke/js/layer/layer.js,__STATIC__/tuiquanke/js/clipboard.min.js,__STATIC__/tuiquanke/js/base.js" />
+</if>

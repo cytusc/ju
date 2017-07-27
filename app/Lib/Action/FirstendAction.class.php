@@ -18,6 +18,10 @@ class FirstendAction extends TopAction
         $this->_init_visitor();
         $this->_assign_oauth();
         $this->assign('nav_curr', '');
+		$key=I("k");
+		$this->assign('key', $key);
+		$this->cur_url= str_replace('/index','',strtolower($_SERVER["REQUEST_URI"]));
+		$this->assign('request_url',$this->cur_url);
         $cate_data = D('items_cate')->cate_data_cache();
         $this->assign('cate_data', $cate_data);
     }
